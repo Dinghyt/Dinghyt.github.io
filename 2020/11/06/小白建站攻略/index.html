@@ -88,8 +88,10 @@
 
 <p>此时你可以运行:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> hexo clean</span><br><span class="line"><span class="variable">$</span> hexo s</span><br></pre></td></tr></table></figure>
-<p>在终端会看到:<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/4.png" alt="avatar"></p>
-<p>打开这个网址,看到的是<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/5.png" alt="avatar"></p>
+<p>在终端会看到:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/4.png" alt="avatar"></p>
+<p>打开这个网址,看到的是</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/5.png" alt="avatar"></p>
 <p>就!对!啦!</p>
 <h2 id="第三步-链接github-这部分搬运自here"><a href="#第三步-链接github-这部分搬运自here" class="headerlink" title="第三步:链接github(这部分搬运自here)"></a>第三步:链接github(这部分搬运自<a target="_blank" rel="noopener" href="https://blog.aierui.com/a/16010316/">here</a>)</h2><h3 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a>注册github</h3><p>如果没有github账号的筒子们要访问<a target="_blank" rel="noopener" href="http://www.github.com/">官网</a>注册一下.</p>
 <h3 id="配置和使用github-详细点击"><a href="#配置和使用github-详细点击" class="headerlink" title="配置和使用github(详细点击)"></a>配置和使用github(详细<a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages">点击</a>)</h3><p><strong><em>配置 SSH keys</em></strong></p>
@@ -102,12 +104,13 @@
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):&lt;输入加密串&gt;</span><br><span class="line">Enter same passphrase again:&lt;再次输入加密串&gt;</span><br></pre></td></tr></table></figure>
 <p>在回车中会提示你输入一个密码，这个密码会在你提交项目时使用，如果为空的话提交项目时则不用输入。这个设置是防止别人往你的项目里提交内容。</p>
 <p>注意：输入密码的时候没有*字样的，你直接输入就可以了。</p>
-<p>最后看到这样的界面，就成功设置ssh key了：<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/6.png" alt="avatar"></p>
+<p>最后看到这样的界面，就成功设置ssh key了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/6.png" alt="avatar"></p>
 <p><strong><em>添加 SSH Key 到 GitHub</em></strong></p>
 <p>在本机设置SSH Key之后，需要添加到GitHub上，以完成SSH链接的设置。</p>
 <p>1、打开本地的id_rsa.pub文件(新生成的话在当时显示的文件夹/Users/your_user_directory/.ssh/id_rsa,因为我们是直接回车的,否则在~/.ssh/中)。此文件里面内容为刚才生成的密钥。如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。<br>2、登陆github系统。点击右上角的 Account Settings—&gt;SSH Public keys —&gt; add another public keys<br>3、把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了</p>
 <p><strong><em>测试</em></strong></p>
-<p>可以输入下面的命令，看看设置是否成功，<a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>的部分不要修改：</p>
+<p>可以输入下面的命令，看看设置是否成功，<a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>的部分不要修改：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> ssh <span class="literal">-T</span> git@github.com</span><br></pre></td></tr></table></figure>
 <p>如果是下面的反馈：</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)?</span><br></pre></td></tr></table></figure>
@@ -121,7 +124,8 @@
 <p><strong><em>SSH Key 配置成功</em></strong></p>
 <p>本机已成功连接到 github。若有问题，请重新设置。常见错误请参考：<br><a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">GitHub Help - Generating SSH Keys</a>和  <a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/error-permission-denied-publickey">GitHub Help - Error Permission denied (publickey)</a>.</p>
 <h3 id="在线预览"><a href="#在线预览" class="headerlink" title="在线预览"></a>在线预览</h3><p>终于,结束了漫长的枯燥的配置,我们要继续无聊的机械工作了.<br><strong><em>创建仓库和本地远程到GitHub仓库</em></strong></p>
-<p>首先在GitHub上创建一个仓库repository，注意仓库名称必须为你的github用户名.github.io<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/7.png" alt="avatar"></p>
+<p>首先在GitHub上创建一个仓库repository，注意仓库名称必须为你的github用户名.github.io</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/7.png" alt="avatar"></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将当前的改动暂存在本地仓库</span></span><br><span class="line"><span class="variable">$</span> git add .</span><br><span class="line"><span class="comment"># 将暂存的改动提交到本地仓库，并写入本次提交的注释是”first post“</span></span><br><span class="line"><span class="variable">$</span> git commit <span class="literal">-m</span> <span class="string">&quot;first post&quot;</span></span><br><span class="line"><span class="comment"># 将远程仓库在本地添加一个引用：origin</span></span><br><span class="line"><span class="variable">$</span> git remote add origin https://github.com/username/projectName.git</span><br><span class="line"><span class="comment"># 向origin推送gh-pages分支，该命令将会将本地分支gh-pages推送到github的远程仓库，并在远程仓库创建一个同名的分支。该命令后会提示输入用户名和密码。</span></span><br><span class="line"><span class="variable">$</span> git push origin gh<span class="literal">-pages</span></span><br></pre></td></tr></table></figure>
 <p>在GitHub上将gh-pages merge 到msater上<br>这一步(黑色框)其实我没做,好像也没啥问题.</p>
 <p><strong><em>添加部署代码</em></strong></p>
@@ -132,9 +136,13 @@
 
 <p>然后在浏览器输入aierui.github.io（自己对应即可）,就可以看到和之前一样<br>(没改动就是本地搭建的原生hexo主页),至此基本功能就实现啦!</p>
 <h2 id="域名购买和解析"><a href="#域名购买和解析" class="headerlink" title="域名购买和解析"></a>域名购买和解析</h2><p><strong>域名购买</strong></p>
-<p>用github名来访问终究是太麻烦(不够cool!),所以有闲钱还推荐大家购买一下域名,解析一下就可以用你自己挑选的名字在互联网占有一址之地啦,学生党的话国内的阿里云和腾讯云似乎是有优惠的,可以去看看,.com的后缀名会贵点,.xyz这种就相对便宜了.<br>我用的是GODAddy,其他还有万网啊啥的,这个自选即可.以下购买部分教程来自<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20463581/answer/25478916">这里</a>.<br>现在 <a target="_blank" rel="noopener" href="https://sg.godaddy.com/zh">GoDaddy</a>已经有中文版了，虽然国家显示是新加坡，但不影响使用.<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/8.png" alt="avatar"></p>
+<p>用github名来访问终究是太麻烦(不够cool!),所以有闲钱还推荐大家购买一下域名,解析一下就可以用你自己挑选的名字在互联网占有一址之地啦,学生党的话国内的阿里云和腾讯云似乎是有优惠的,可以去看看,.com的后缀名会贵点,.xyz这种就相对便宜了.<br>我用的是GODAddy,其他还有万网啊啥的,这个自选即可.以下购买部分教程来自<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20463581/answer/25478916">这里</a>.<br>现在 <a target="_blank" rel="noopener" href="https://sg.godaddy.com/zh">GoDaddy</a>已经有中文版了，虽然国家显示是新加坡，但不影响使用.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/8.png" alt="avatar"></p>
 <ul>
-<li>查你想要的域名<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/9.png" alt="avatar"></li>
+<li>查你想要的域名</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/9.png" alt="avatar"></p>
+<ul>
 <li>查到适合的域名之后选择「添加到购物车」.</li>
 <li>GoDaddy 其他域名收费服务，不要管，继续「进入购物车」,后面的服务全部点击「不，谢谢」，免费的服务也不要用.</li>
 <li>确认购买 修改购买年限，默认是两年，可以修改成 1/2/3/5/10 年，随自己喜欢.</li>
@@ -153,9 +161,14 @@
 <p>买域名是为了自己diy个名字,那怎么把我们原来aierui.github.io(自己的名字自己套)的网页给套到这个网址呢,就需要添加一下解析的记录,然后在github里也填写一下转到的网址,彼此认识一下就好啦!具体来说就是</p>
 <ul>
 <li>在godaddy点击你的账户，管理我的域名。</li>
-<li>点击域名<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/10.png" alt="avatar"></li>
-<li>添加记录<br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/11.png" alt="avatar"><br>其中A的两条记录指向的ip地址是github Pages的提供的ip</li>
+<li>点击域名</li>
 </ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/10.png" alt="avatar"></p>
+<ul>
+<li>添加记录</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/11.png" alt="avatar"></p>
+<p>其中A的两条记录指向的ip地址是github Pages的提供的ip</p>
 <ol>
 <li>192.30.252.153</li>
 <li>192.30.252.154<br>如博客不能登录，有可能是 github 更改了空间服务的 ip 地址，记得及时到在GitHub Pages查看最新的ip即可</li>
