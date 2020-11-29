@@ -98,9 +98,8 @@
 
 <p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201125/4.png" alt="description"></p>
 </center>
-## 编译
-在build文件夹里可以找到GLFW.sln文件，用Visual Studio 2015打开。因为CMake已经配置好了项目，所以我们直接点击Build Solution(生成解决方案)按钮，然后编译的库glfw3.lib（注意我们用的是第3版）就会出现在src/Debug文件夹内。
 
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>在build文件夹里可以找到GLFW.sln文件，用Visual Studio 2015打开。因为CMake已经配置好了项目，所以我们直接点击Build Solution(生成解决方案)按钮，然后编译的库glfw3.lib（注意我们用的是第3版）就会出现在src/Debug文件夹内。</p>
 <p>库生成完毕之后，我们需要让IDE知道库和头文件的位置。有两种方法：</p>
 <ol>
 <li>找到IDE或者编译器的/lib和/include文件夹，添加GLFW的include文件夹里的文件到IDE的/include文件夹里去。用类似的方法，将glfw3.lib添加到/lib文件夹里去。虽然这样能工作，但这不是推荐的方式，因为这样会让你很难去管理库和include文件，而且重新安装IDE或编译器可能会导致这些文件丢失。</li>
@@ -131,10 +130,10 @@
 </center>
 GLFW的安装与配置就到此为止。
 
-<h2 id="GLAD"><a href="#GLAD" class="headerlink" title="GLAD"></a>GLAD</h2><blockquote>
+<h2 id="GLAD"><a href="#GLAD" class="headerlink" title="GLAD"></a>GLAD</h2><p>GLAD是一个开源的库，它能解决我们上面提到的那个繁琐的问题。GLAD的配置与大多数的开源库有些许的不同，GLAD使用了一个在线服务。在这里我们能够告诉GLAD需要定义的OpenGL版本，并且根据这个版本加载所有相关的OpenGL函数。</p>
+<blockquote>
 <p>因为OpenGL只是一个标准/规范，具体的实现是由驱动开发商针对特定显卡实现的。由于OpenGL驱动版本众多，它大多数函数的位置都无法在编译时确定下来，需要在运行时查询。所以任务就落在了开发者身上，开发者需要在运行时获取函数地址并将其保存在一个函数指针中供以后使用。幸运的是，有些库能简化此过程，其中GLAD是目前最新，也是最流行的库。</p>
 </blockquote>
-<p>GLAD是一个开源的库，它能解决我们上面提到的那个繁琐的问题。GLAD的配置与大多数的开源库有些许的不同，GLAD使用了一个在线服务。在这里我们能够告诉GLAD需要定义的OpenGL版本，并且根据这个版本加载所有相关的OpenGL函数。</p>
 <p>打开<a target="_blank" rel="noopener" href="https://glad.dav1d.de/">GLAD的在线服务</a>，将语言(Language)设置为C/C++，在API选项中，选择3.3以上的OpenGL(gl)版本（我们的教程中将使用3.3版本，但更新的版本也能正常工作）。之后将模式(Profile)设置为Core，并且保证生成加载器(Generate a loader)的选项是选中的。现在可以先（暂时）忽略拓展(Extensions)中的内容。都选择完之后，点击生成(Generate)按钮来生成库文件。</p>
 <center>
 
