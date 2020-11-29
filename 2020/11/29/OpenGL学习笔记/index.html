@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>OpenGL学习笔记</title>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/normal.css">
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/jquery-3.4.1.min.js"></script>
+
+<link rel="alternate" href="/atom.xml" title="Oh My God" type="application/atom+xml">
+</head>
+<body>
+    <a id="cover"></a>
+    <div id="header">
+    <div class="header">
+        <div class="vertical">
+            <div class="inner">
+                <h1 class="header-subtitle">OpenGL学习笔记</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2020-11-29
+                        </span>
+                        
+                            <span id="/2020/11/29/OpenGL学习笔记/" class="leancloud_visitors" data-flag-title="OpenGL学习笔记">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2020/11/29/OpenGL学习笔记/"></span>
+                        </span>  
+                    </p>                 
+                </div>
+            </div>
+        </div>
+        <canvas id="articleHeaderCanvas"></canvas>
+    </div>
+</div>
+    <div id="container">
+    <div id="content">
+        <div id="article">
+    <!-- Table of Contents -->
+<div id="toc" class="toc-article">
+<strong class="toc-title">文章目录</strong>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenGL"><span class="toc-number">2.</span> <span class="toc-text">OpenGL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">一些链接：</span></a></li></ol></li></ol>
+</div>
+
+    <div class="article-body">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>出于学习需要，要开始opengl的学习啦（小白哭泣）。这个标签下将记录一下个人的学习笔记还有一些学习资源。主要是跟着教程跑一遍 ，希望能实践+了解原理。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/">教程中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl.com/">教程英文版</a></li>
+<li>辅助书籍《OpenGL SuperBible》第七版</li>
+</ul>
+<p>感谢<a target="_blank" rel="noopener" href="https://joeydevries.com/#home">Joey de Vries</a>大佬，大爱翻译团队！</p>
+<h1 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h1><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/OpenGL">OpenGL</a>（英语：Open Graphics Library，译名：开放图形库或者“开放式图形库”）是用于渲染2D、3D矢量图形的跨语言、跨平台的应用程序编程接口（API）。这个接口由近350个不同的函数调用组成，用来从简单的图形比特绘制复杂的三维景象。而另一种程序接口系统是仅用于Microsoft Windows上的<strong>Direct3D</strong>。OpenGL常用于CAD、虚拟现实、科学可视化程序和电子游戏开发。</p>
+<p>更确切的说，openGL是一个关于图形的API的规范（specification），比如给出IDL(interface definition language)。OpenGL API是一套接口，学习这套接口，就可以在那些支持OpenGL的机器上正常使用这些接口，在屏幕上看到绘制的结果。</p>
+<p>OpenGL不仅语言无关，而且平台无关。规范只字未提获得和管理OpenGL上下文相关的内容，而是将这些作为细节交给底层的窗口系统。出于同样的原因，OpenGL纯粹专注于渲染，而不提供输入、音频以及窗口相关的API。OpenGL被设计为只有输出的，所以它只提供渲染功能。核心API没有窗口系统、音频、打印、键盘／鼠标或其他输入设备的概念。虽然这一开始看起来像是一种限制，但它允许进行渲染的代码完全独立于他运行的操作系统，允许跨平台开发。</p>
+<p>这套接口是Khronos这个组织在维护，怎么维护呢?就是写一个说明书，指导各个GPU厂家，如果他们要支持OpenGL的话，要怎么实现一个具体的OpenGL库。Khronos说要实现glDrawArray这个接口，那么厂家就得在他的库里实现这个接口。如果不实现，那么就不算支持OpenGL。也有一些接口不一定要实现（GPU供应商可以通过扩展形式提供额外功能）。</p>
+<p>Khronos每隔一段时间发布一个新的OpenGL API版本，就是发布这个说明书。一般两个，一个是core profile，一定要实现的，还有另一个是为了兼容旧版本接口的说明书。厂家实现的OpenGL库的内容其实就是厂家自己的团队整合自己的图形知识以及GPU硬件的指令。</p>
+<p>OpenGL 上下文（英语：OpenGL context）的创建过程相当复杂，在不同的操作系统上也需要不同的做法。因此很多游戏开发和用户界面库都提供自动创建 OpenGL 上下文的功能。有一些库是专门用来创建OpenGL窗口的，其中最早的便是 <strong>GLUT</strong>，后被freeglut取代，比较新的也有 <strong>GLFW</strong>可以使用。</p>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p>使用的是windows环境下glfw + opengl3.3</p>
+<p>会首先讨论核心的图形学概念，OpenGL怎样将像素绘制到屏幕上，以及如何利用黑科技做出一些很酷的效果。</p>
+<p>除了核心概念之外，我们还会讨论许多有用的技巧，它们都可以用在你的程序中，比如说在场景中移动，做出漂亮的光照，加载建模软件导出的自定义模型，做一些很酷的后期处理技巧等。最后，我们也将会使用我们已学的知识从头开始做一个小游戏，让你真正体验一把图形编程的魅力。</p>
+<h2 id="一些链接："><a href="#一些链接：" class="headerlink" title="一些链接："></a>一些链接：</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/OpenGL">OpenGL的wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/51867884">OpenGL是什么? - 知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96ee2cdb10c0">OpenGL特点</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/">教程中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl.com/">教程英文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://joeydevries.com/#home">Joey de Vries</a></li>
+<li>教程笔记参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhxmdefj/category/1502112.html">https://www.cnblogs.com/zhxmdefj/category/1502112.html</a></li>
+</ul>
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/avatar/avator1.jpg" alt="Dinghy">
+            </div>
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：Dinghy
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2020/11/29/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">OpenGL学习笔记</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：静如瘫痪,动如癫狂.
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="article-footer">
+        
+            <div class="category">
+                分类：
+                
+                    <a href="/category/Learning/">Learning</a>
+                
+            </div>
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/OpenGL/">OpenGL</a>
+                
+            </div>
+        
+        <div class="article-prev-next">
+            
+                <a href="/2020/11/29/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="prev-prefix">« </a> 上一篇：    <a href="/2020/11/29/OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="发布于 2020-11-29 05:09">OpenGL学习笔记-环境搭建</a>
+                <br>
+            
+            
+                <a href="/2020/11/29/%E5%A5%97%E6%A8%A1%E6%9D%BF%EF%BC%8C%E6%90%9E%E8%AE%BA%E6%96%87/" class="next-prefix">» </a> 下一篇：    <a href="/2020/11/29/%E5%A5%97%E6%A8%A1%E6%9D%BF%EF%BC%8C%E6%90%9E%E8%AE%BA%E6%96%87/" title="发布于 2020-11-29 03:18">套模板，搞论文</a>
+            
+        </div>
+    </div>
+    
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
+        </div>
+        <div class="comments-content">
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</div>
+    <div id="footer"></div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar"></div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user"><span></span></div>        
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul></ul> 
+            </div> 
+            <div class="menu-link"></div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/search.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/iscroll.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/APlayer.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/Meting.min.js"></script>
+    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    <div class="wrap-right"></div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : 'Dinghyt',
+        GitHubRepositories : 'dlog',
+
+        BlogUser      : 'Dinghy',
+        BlogAvatar    : 'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/avatar/avator1.jpg',
+        BlogStartDate : '2020-10-28',
+
+        WebsiteTitleBlur         : '(◍´꒳`◍) Hi, little biscuit',
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : '(*´∇｀*) Welcome Back',
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : 'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/website/logo.jpg',
+
+        ProgressBar: {
+            id       : 'topProgressBar',
+            color    : '#77B6FF',
+            height   : '2px',
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound: {
+                tension  : 16,
+                friction : 5
+            },
+            spinner: {
+                id     : 'spinner',
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : '#F0F0F0',
+                    stroke     : '#272633',
+                    base       : '',
+                    child      : '#272633'
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : 'rgba(255, 255, 255, .2)',
+            clearOffset : 0.3
+        },
+
+        ArticleHeaderAnimationRendered : false,
+        ArticleHeaderAnimation         : {
+            triW                  : 14,
+            triH                  : 20,
+            neighbours            : [
+                
+                    'side',
+                
+                    'top',
+                
+                    'bottom',
+                
+            ],
+            speedTrailAppear      : 0.1,
+            speedTrailDisappear   : 0.1,
+            speedTriOpen          : 1,
+            trailMaxLength        : 30,
+            trailIntervalCreation : 100,
+            delayBeforeDisappear  : 2,
+            colors                : [
+                
+                    '#96EDA6',
+                
+                    '#5BC6A9',
+                
+                    '#38668C',
+                
+                    '#374D84',
+                
+                    '#BED5CB',
+                
+                    '#62ADC6',
+                
+                    '#8EE5DE',
+                
+                    '#304E7B',
+                
+            ]
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : '60%',
+            colorBrightness  : '50%',
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : 'random',
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/home1.jpg',
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/home2.jpg',
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/home3.jpg',
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/home7.jpg',
+            
+        ],
+        HomeBannerText  : '所谓障碍都是主观上的。如果你想动手开发什么全新的技术，你不需要几百万美元的资金，你只需要在冰箱里放满比萨和可乐，再有一台便宜的计算机，和为之献身的决心。我们在地板上睡过，我们从河水中趟过。 --约翰·卡马克',
+
+        ArticleHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/article1.jpg',
+            
+                'https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/header/article3.jpg',
+            
+        ],
+
+        OtherBannerText  : '',
+
+        MenuList : [
+            
+                {
+                    name   : '首页',
+                    href   : '/',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '标签',
+                    href   : '/tag',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '分类',
+                    href   : '/category',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '归档',
+                    href   : '/archive',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '赞赏',
+                    href   : '/donate',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '关于',
+                    href   : '/about',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '订阅',
+                    href   : '/atom.xml',    
+                    target : '_blank',
+                    class  : ''
+                },
+            
+                {
+                    name   : '搜索',
+                    href   : '',    
+                    target : '',
+                    class  : 'search'
+                },
+            
+                {
+                    name   : '留言板',
+                    href   : '/comment',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '友情链接',
+                    href   : '/friend',    
+                    target : '',
+                    class  : ''
+                },
+            
+        ],
+        MenuLink : [
+            
+                {
+                    icon : 'icon-weibo', 
+                    url  : ''
+                },
+            
+                {
+                    icon : 'icon-wechat', 
+                    url  : ''
+                },
+            
+                {
+                    icon : 'icon-qq', 
+                    url  : ''
+                },
+            
+                {
+                    icon : 'icon-github', 
+                    url  : ''
+                },
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : {
+            icon    : '',
+            left    : '想牵你的手',
+            right   : '然后带你远走'
+        },
+        ThemeInfo   : false,
+
+        ConsoleList : [
+            
+                [
+                    
+                        'Based on cnblogs theme SimpleMemory.',
+                    
+                        '',
+                    
+                ],
+            
+                [
+                    
+                        'SimpleMemory Author:',
+                    
+                        'BNDong',
+                    
+                ],
+            
+                [
+                    
+                        'Theme:',
+                    
+                        'LiveForCode',
+                    
+                ],
+            
+        ],
+
+        FontIconExtend : "",
+
+        Donate : {
+            paypal  : '',
+            bitcoin : '',
+            alipay  : '',
+            wechat  : ''
+        },
+
+        Code : {
+            style : 'normal'
+        },  
+
+        Search : {
+            applicationID : '0798QU8T37M',
+            apiKey        : 'abe6b13ded06abb1f11ec41b155aba5f',
+            indexName     : 'SOFM',
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : '搜索',
+                empty       : '未发现与 「${query}」 相关的内容',
+                stats       : '${hits} 条相关条目，使用了 ${time} 毫秒',
+            }
+        }, 
+
+        Valine : {
+            switch         : true,
+            el             : '.comments-content',
+            appId          : '5pkkzofSWgoMAwy9gziYFTmS-gzGzoHsz',
+            appKey         : 'Gps2EgbJuUCCBoKinLrjLK6M',
+            placeholder    : 'Type your comments here...',
+            avatar         : 'retro',
+            meta           : 'nick,mail,link',
+            requiredFields : 'nick',
+            pageSize       : 5,
+            lang           : 'zh-cn',
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : '.toc',
+            contentSelector       : '.article-body',
+            headingSelector       : 'h1, h2, h3, h4, h5',
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : '.toc',
+            positionFixedClass    : 'toc-fixed',
+            fixedSidebarOffset    : '',
+        },
+
+        Require : {
+            baseUrl     : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/",
+            waitSeconds : 100
+        },
+
+        Meting : {
+            id       : "3778678", 
+            lrcshow  : false, 
+            server   : "netease", 
+            type     : "playlist", 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : "all", 
+            order    : "random", 
+            preload  : "auto", 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        LazyLoad : {
+            default : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/website/lazyload.svg"
+        },
+  
+
+        Style : {
+            aplayer          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/APlayer.css",
+            archive          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/archive.css",
+            donate           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/donate.css",
+            fancybox         : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/jquery.fancybox.css",
+            footer           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/footer.css",
+            iconfont         : "https://at.alicdn.com/t/font_1546312_l3yohatebw.css",
+            index            : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/index.css",
+            menuBubble       : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/menu-bubble.css",
+            page             : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/page.css",
+            post             : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/post.css",
+            search           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/search.css",
+            tocbot           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/tocbot.css",
+            normal           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/normal.css",
+            night            : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/night.css",
+            clipboard        : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/css/clipboard.css"
+        },
+
+        Script: {
+            aplayer          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/APlayer.min.js",
+            config           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/require.config.js",
+            index            : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/index.js",
+            instantSearch    : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/instantsearch.min.js",
+            jQuery           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/jquery-3.4.1.min.js",
+            loading          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/loading.js",
+            meting           : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/Meting.min.js",
+            iscroll          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/iscroll.js",
+            require          : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/require.min.js"
+        },
+
+        Font: {
+            LongCang   : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/LongCang.css",
+            Monda      : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Monda.css",
+            NotoSansSC : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/NotoSansSC.css",
+            Playball   : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Playball.css",
+            PTMono     : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/PTMono.css",
+            RobotoSlab : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/RobotoSlab.css",
+            Rosario    : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/Rosario.css",
+            UbuntuMono : "https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/font/UbuntuMono.css"
+        },
+
+        Suffix : {
+            about : '静如瘫痪,动如癫狂.'
+        },
+            
+        Theme : {
+            url  : 'https://github.com/first19326/Hexo-LiveForCode',
+            name : 'Hexo - Live For Code'
+        }  
+    };
+</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/index.js"></script>
+</body>
+</html>
