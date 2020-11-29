@@ -58,7 +58,31 @@
         <div id="article">
     <div class="toc"></div>
     <div class="article-body">
-        <h1 id="开个新坑"><a href="#开个新坑" class="headerlink" title="开个新坑"></a>开个新坑</h1>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>出于学习需要，要开始opengl的学习啦（小白哭泣）。这个标签下将记录一下个人的学习笔记还有一些学习资源。主要是跟着教程跑一遍 ，希望能实践+了解原理。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/">教程中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl.com/">教程英文版</a></li>
+<li>辅助书籍《OpenGL SuperBible》第七版</li>
+</ul>
+<p>感谢<a target="_blank" rel="noopener" href="https://joeydevries.com/#home">Joey de Vries</a>大佬，大爱翻译团队！</p>
+<h1 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h1><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/OpenGL">OpenGL</a>（英语：Open Graphics Library，译名：开放图形库或者“开放式图形库”）是用于渲染2D、3D矢量图形的跨语言、跨平台的应用程序编程接口（API）。这个接口由近350个不同的函数调用组成，用来从简单的图形比特绘制复杂的三维景象。而另一种程序接口系统是仅用于Microsoft Windows上的<strong>Direct3D</strong>。OpenGL常用于CAD、虚拟现实、科学可视化程序和电子游戏开发。</p>
+<p>更确切的说，openGL是一个关于图形的API的规范（specification），比如给出IDL(interface definition language)。OpenGL API是一套接口，学习这套接口，就可以在那些支持OpenGL的机器上正常使用这些接口，在屏幕上看到绘制的结果。</p>
+<p>OpenGL不仅语言无关，而且平台无关。规范只字未提获得和管理OpenGL上下文相关的内容，而是将这些作为细节交给底层的窗口系统。出于同样的原因，OpenGL纯粹专注于渲染，而不提供输入、音频以及窗口相关的API。OpenGL被设计为只有输出的，所以它只提供渲染功能。核心API没有窗口系统、音频、打印、键盘／鼠标或其他输入设备的概念。虽然这一开始看起来像是一种限制，但它允许进行渲染的代码完全独立于他运行的操作系统，允许跨平台开发。</p>
+<p>这套接口是Khronos这个组织在维护，怎么维护呢?就是写一个说明书，指导各个GPU厂家，如果他们要支持OpenGL的话，要怎么实现一个具体的OpenGL库。Khronos说要实现glDrawArray这个接口，那么厂家就得在他的库里实现这个接口。如果不实现，那么就不算支持OpenGL。也有一些接口不一定要实现（GPU供应商可以通过扩展形式提供额外功能）。</p>
+<p>Khronos每隔一段时间发布一个新的OpenGL API版本，就是发布这个说明书。一般两个，一个是core profile，一定要实现的，还有另一个是为了兼容旧版本接口的说明书。厂家实现的OpenGL库的内容其实就是厂家自己的团队整合自己的图形知识以及GPU硬件的指令。</p>
+<p>OpenGL 上下文（英语：OpenGL context）的创建过程相当复杂，在不同的操作系统上也需要不同的做法。因此很多游戏开发和用户界面库都提供自动创建 OpenGL 上下文的功能。有一些库是专门用来创建OpenGL窗口的，其中最早的便是 <strong>GLUT</strong>，后被freeglut取代，比较新的也有 **GLFW **可以使用。</p>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p>使用的是windows环境下glfw + opengl3.3</p>
+<p>会首先讨论核心的图形学概念，OpenGL怎样将像素绘制到屏幕上，以及如何利用黑科技做出一些很酷的效果。</p>
+<p>除了核心概念之外，我们还会讨论许多有用的技巧，它们都可以用在你的程序中，比如说在场景中移动，做出漂亮的光照，加载建模软件导出的自定义模型，做一些很酷的后期处理技巧等。最后，我们也将会使用我们已学的知识从头开始做一个小游戏，让你真正体验一把图形编程的魅力。</p>
+<h2 id="一些链接："><a href="#一些链接：" class="headerlink" title="一些链接："></a>一些链接：</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/OpenGL">OpenGL的wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/51867884">OpenGL是什么? - 知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96ee2cdb10c0">OpenGL特点</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/">教程中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnopengl.com/">教程英文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://joeydevries.com/#home">Joey de Vries</a></li>
+</ul>
+
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">
             <div class="suffix-box-left">
