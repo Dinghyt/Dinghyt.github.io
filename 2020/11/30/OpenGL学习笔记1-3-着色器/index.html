@@ -73,7 +73,7 @@
 
 <p>当我们特别谈论到顶点着色器的时候，每个输入变量也叫<code>顶点属性(Vertex Attribute)</code>。由location标识。我们能声明的顶点属性是有上限的，它一般由硬件来决定。OpenGL确保至少有16个包含4分量的顶点属性可用，但是有些硬件或许允许更多的顶点属性，你可以查询<em>GL_MAX_VERTEX_ATTRIBS</em>来获取具体的上限：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nrAttributes;</span><br><span class="line">glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &amp;nrAttributes);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Maximum nr of vertex attributes supported: &quot;</span> &lt;&lt; nrAttributes &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="单变量"><a href="#单变量" class="headerlink" title="单变量"></a>单变量</h2><p>和其他编程语言一样，GLSL有数据类型可以来指定变量的种类。GLSL中包含C等其它语言大部分的默认基础数据类型：、<code>int</code>、<code>float</code>、<code>double</code>、<code>uint</code>和<code>bool</code>。GLSL也有两种容器类型，它们会在这个教程中使用很多，分别是向量(Vector)和矩阵(Matrix)，其中矩阵我们会在之后的教程里再讨论。</p>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="单变量"><a href="#单变量" class="headerlink" title="单变量"></a>单变量</h2><p>和其他编程语言一样，GLSL有数据类型可以来指定变量的种类。GLSL中包含C等其它语言大部分的默认基础数据类型：<code>int</code>、<code>float</code>、<code>double</code>、<code>uint</code>和<code>bool</code>。GLSL也有两种容器类型，它们会在这个教程中使用很多，分别是向量(Vector)和矩阵(Matrix)，其中矩阵我们会在之后的教程里再讨论。</p>
 <h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><table>
 <thead>
 <tr>
