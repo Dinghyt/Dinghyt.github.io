@@ -123,7 +123,31 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> texCoords[] = &#123;</span><br><span class="line">    <span class="number">1.5f</span>, <span class="number">1.5f</span>, <span class="comment">// top right</span></span><br><span class="line">    <span class="number">1.5f</span>, <span class="number">-0.5f</span>, <span class="comment">// bottom right</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="comment">// bottom left</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">1.5f</span>  <span class="comment">// top left </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 纹理坐标大概就是这么对应的，但是我们可以看到以上有的时候我们把纹理坐标设置在范围之外了，那那些区域的值是如何定义的呢，你可以看到上面范围之外的都是黑色，那其实是为了更加明显的显示出纹理坐标我设置成了黑色，OpenGL提供了更多的选择关于如何处置这部分的结果。
 
-<h3 id="纹理环绕方式"><a href="#纹理环绕方式" class="headerlink" title="纹理环绕方式"></a>纹理环绕方式</h3><p>纹理坐标的范围通常是从(0, 0)到(1, 1)，那如果我们把纹理坐标设置在范围之外会发生什么？OpenGL默认的行为是重复这个纹理图像（我们基本上忽略浮点纹理坐标的整数部分），但OpenGL提供了更多的选择：<br>|环绕方式|描述|<br>|:—|:—|<br>|GL_REPEAT    |对纹理的默认行为。重复纹理图像。|<br>|GL_MIRRORED_REPEAT    |和GL_REPEAT一样，但每次重复图片是镜像放置的。|<br>|GL_CLAMP_TO_EDGE    |纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。|<br>|GL_CLAMP_TO_BORDER|    超出的坐标为用户指定的边缘颜色。|</p>
+<h3 id="纹理环绕方式"><a href="#纹理环绕方式" class="headerlink" title="纹理环绕方式"></a>纹理环绕方式</h3><p>纹理坐标的范围通常是从(0, 0)到(1, 1)，那如果我们把纹理坐标设置在范围之外会发生什么？OpenGL默认的行为是重复这个纹理图像（我们基本上忽略浮点纹理坐标的整数部分），但OpenGL提供了更多的选择：</p>
+<table>
+<thead>
+<tr>
+<th align="left">环绕方式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GL_REPEAT</td>
+<td align="left">对纹理的默认行为。重复纹理图像。</td>
+</tr>
+<tr>
+<td align="left">GL_MIRRORED_REPEAT</td>
+<td align="left">和GL_REPEAT一样，但每次重复图片是镜像放置的。</td>
+</tr>
+<tr>
+<td align="left">GL_CLAMP_TO_EDGE</td>
+<td align="left">纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。</td>
+</tr>
+<tr>
+<td align="left">GL_CLAMP_TO_BORDER</td>
+<td align="left">超出的坐标为用户指定的边缘颜色。</td>
+</tr>
+</tbody></table>
 <p>当纹理坐标超出默认范围时，每个选项都有不同的视觉效果输出。我们来看看这些纹理图像的例子</p>
 <center>
 
