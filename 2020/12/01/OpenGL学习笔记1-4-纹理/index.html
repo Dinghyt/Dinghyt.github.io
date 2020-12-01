@@ -123,7 +123,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> texCoords[] = &#123;</span><br><span class="line">    <span class="number">1.5f</span>, <span class="number">1.5f</span>, <span class="comment">// top right</span></span><br><span class="line">    <span class="number">1.5f</span>, <span class="number">-0.5f</span>, <span class="comment">// bottom right</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="comment">// bottom left</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">1.5f</span>  <span class="comment">// top left </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 纹理坐标大概就是这么对应的，但是我们可以看到以上有的时候我们把纹理坐标设置在范围之外了，那那些区域的值是如何定义的呢，你可以看到上面范围之外的都是黑色，那其实是为了更加明显的显示出纹理坐标我设置成了黑色，OpenGL提供了更多的选择关于如何处置这部分的结果。
 
-<h3 id="纹理环绕方式"><a href="#纹理环绕方式" class="headerlink" title="纹理环绕方式"></a>纹理环绕方式</h3><p>纹理坐标的范围通常是从(0, 0)到(1, 1)，那如果我们把纹理坐标设置在范围之外会发生什么？OpenGL默认的行为是重复这个纹理图像（我们基本上忽略浮点纹理坐标的整数部分），但OpenGL提供了更多的选择：<br>|环绕方式|描述|<br>|:—|:—|<br>|GL_REPEAT    |对纹理的默认行为。重复纹理图像。<br>|GL_MIRRORED_REPEAT    |和GL_REPEAT一样，但每次重复图片是镜像放置的。<br>|GL_CLAMP_TO_EDGE    |纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。<br>|GL_CLAMP_TO_BORDER|    超出的坐标为用户指定的边缘颜色。</p>
+<h3 id="纹理环绕方式"><a href="#纹理环绕方式" class="headerlink" title="纹理环绕方式"></a>纹理环绕方式</h3><p>纹理坐标的范围通常是从(0, 0)到(1, 1)，那如果我们把纹理坐标设置在范围之外会发生什么？OpenGL默认的行为是重复这个纹理图像（我们基本上忽略浮点纹理坐标的整数部分），但OpenGL提供了更多的选择：<br>|环绕方式|描述|<br>|:—|:—|<br>|GL_REPEAT    |对纹理的默认行为。重复纹理图像。|<br>|GL_MIRRORED_REPEAT    |和GL_REPEAT一样，但每次重复图片是镜像放置的。|<br>|GL_CLAMP_TO_EDGE    |纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。|<br>|GL_CLAMP_TO_BORDER|    超出的坐标为用户指定的边缘颜色。|</p>
 <p>当纹理坐标超出默认范围时，每个选项都有不同的视觉效果输出。我们来看看这些纹理图像的例子</p>
 <center>
 
@@ -194,11 +194,8 @@ GL_NEAREST产生了颗粒状的图案，我们能够清晰看到组成纹理的�
 <td align="left">GL_LINEAR_MIPMAP_LINEAR</td>
 <td align="left">在两个邻近的多级渐远纹理之间使用线性插值，并使用线性插值进行采样</td>
 </tr>
-<tr>
-<td align="left">就像纹理过滤一样，我们可以使用glTexParameteri将过滤方式设置为前面四种提到的方法之一：</td>
-<td align="left"></td>
-</tr>
 </tbody></table>
+<p>就像纹理过滤一样，我们可以使用glTexParameteri将过滤方式设置为前面四种提到的方法之一：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br></pre></td></tr></table></figure>
 <p>一个<code>常见的错误</code>是，将放大过滤的选项设置为多级渐远纹理过滤选项之一。这样没有任何效果，因为<strong>多级渐远纹理主要是使用在纹理被缩小的情况下的</strong>：纹理放大不会使用多级渐远纹理，为放大过滤设置多级渐远纹理的选项会产生一个GL_INVALID_ENUM错误代码。</p>
 <h1 id="加载和创建纹理"><a href="#加载和创建纹理" class="headerlink" title="加载和创建纹理"></a>加载和创建纹理</h1><h2 id="加载图像"><a href="#加载图像" class="headerlink" title="加载图像"></a>加载图像</h2><p>使用纹理之前要做的第一件事是把它们加载到我们的应用中。纹理图像可能被储存为各种各样的格式，每种都有自己的数据结构和排列，所以我们如何才能把这些图像加载到应用中呢？一个解决方案是选一个需要的文件格式，比如.PNG，然后自己写一个图像加载器，把图像转化为字节序列。写自己的图像加载器虽然不难，但仍然挺麻烦的，而且如果要支持更多文件格式呢？你就不得不为每种你希望支持的格式写加载器了。</p>
