@@ -69,7 +69,7 @@
 <li>官方代码见<a target="_blank" rel="noopener" href="https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/5.2.transformations_exercise2/transformations_exercise2.cpp">这里</a></li>
 </ul>
 <h1 id="start"><a href="#start" class="headerlink" title="start"></a>start</h1><p>尽管我们现在已经知道了如何创建一个物体、着色、加入纹理，给它们一些细节的表现，但因为它们都还是静态的物体，仍是不够有趣。我们可以尝试着在每一帧改变物体的顶点并且重配置缓冲区从而使它们移动，但这太繁琐了，而且会消耗很多的处理时间。我们现在有一个更好的解决方案，使用（多个）矩阵(Matrix)对象可以更好的变换(Transform)一个物体。</p>
-<p>在正式展开之前，需要自主理解几个概念：向量、矩阵、标量等。<br>aaaa</p>
+<p>在正式展开之前，需要自主理解几个概念：向量、矩阵、标量等。</p>
 <script type="math/tex; mode=display">lim_{1\to+\infty}P(|\frac{1}{n}\sum_i^nX_i-\mu|<\epsilon)=1, i=1,...,n</script><h1 id="向量："><a href="#向量：" class="headerlink" title="向量："></a>向量：</h1><script type="math/tex; mode=display">
  \vec{v} = \begin{pmatrix}
 x\\ 
@@ -126,6 +126,7 @@ z\\
 w
 \end{bmatrix}</script><blockquote>
 <p>单位矩阵通常是生成其他变换矩阵的起点，如果我们深挖线性代数，这还是一个对证明定理、解线性方程非常有用的矩阵。</p>
+</blockquote>
 <h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>假设缩放向量表示为$\left ( S_1, S_2,S_3 \right )$:</p>
 <script type="math/tex; mode=display">
 \begin{bmatrix}
@@ -145,8 +146,7 @@ S_1 \cdot x\\
 S_2 \cdot y\\ 
 S_3 \cdot z\\ 
 1
-\end{bmatrix}</script></blockquote>
-<h2 id="位移"><a href="#位移" class="headerlink" title="位移"></a>位移</h2><p>假设位移向量表示为$\left ( T_x, T_y,T_z \right )$:</p>
+\end{bmatrix}</script><h2 id="位移"><a href="#位移" class="headerlink" title="位移"></a>位移</h2><p>假设位移向量表示为$\left ( T_x, T_y,T_z \right )$:</p>
 <script type="math/tex; mode=display">
 \begin{bmatrix}
 1 & 0 & 0 & T_x\\ 
