@@ -72,7 +72,7 @@
 <h2 id="点乘："><a href="#点乘：" class="headerlink" title="点乘："></a>点乘：</h2><p>使用点乘可以很容易测试两个向量是否正交(Orthogonal)或平行（正交意味着两个向量互为直角）。<br>$$<br>\vec{v}\cdot \vec{k} = \left | \vec{v} \right | \cdot \left | \vec{k} \right | \cdot cos\theta = x_1x_2 + y_1y_2 + z_1z_2<br>$$</p>
 <h2 id="叉乘："><a href="#叉乘：" class="headerlink" title="叉乘："></a>叉乘：</h2><p>叉乘只在3D空间中有定义，它需要两个不平行向量作为输入，生成一个正交于两个输入向量的第三个向量。如果输入的两个向量也是正交的，那么叉乘之后将会产生3个互相正交的向量。</p>
 <p>$$<br>\begin{pmatrix}<br>A_x\<br>A_y\<br>A_z<br>\end{pmatrix} \times \begin{pmatrix}<br>B_x\<br>B_y\<br>B_z<br>\end{pmatrix} = \begin{pmatrix}<br>A_y\cdot B_z - A_z\cdot B_y\<br>A_z\cdot B_x - A_x\cdot B_z\<br>A_x\cdot B_y - A_y\cdot B_x<br>\end{pmatrix}<br>$$</p>
-<h1 id="矩阵："><a href="#矩阵：" class="headerlink" title="矩阵："></a>矩阵：</h1><p>简单来说矩阵就是一个矩形的数字、符号或表达式数组。下面是一个2×3矩阵的例子：</p>
+<h1 id="矩阵："><a href="#矩阵：" class="headerlink" title="矩阵："></a>矩阵：</h1><p>简单来说矩阵就是一个矩形的数字、符号或表达式数组。下面是一个2×3矩阵的例子：<br>$$f(x)=\frac{P(x)}{Q(x)}$$</p>
 <p>$$<br>\begin{bmatrix}<br>1 &amp; 2 &amp; 3\<br>4 &amp; 5 &amp; 6<br>\end{bmatrix}<br>$$</p>
 <p>矩阵可以通过(i,jj)进行索引，i是行，j是列，这就是上面的矩阵叫做2×3矩阵的原因（3列2行，也叫做矩阵的维度(Dimension)）。这与你在索引2D图像时的(x, y)相反，获取4的索引是(2, 1)（第二行，第一列）（译注：如果是图像索引应该是(1, 2)，先算列，再算行）。</p>
 <h2 id="矩阵相乘"><a href="#矩阵相乘" class="headerlink" title="矩阵相乘"></a>矩阵相乘</h2><p>矩阵之间的乘法不见得有多复杂，但的确很难让人适应。矩阵乘法基本上意味着遵照规定好的法则进行相乘。当然，相乘还有一些限制：</p>
