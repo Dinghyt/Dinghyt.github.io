@@ -24,7 +24,9 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/js/jquery-3.4.1.min.js"></script>
 
-<link rel="alternate" href="/atom.xml" title="Oh My God" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="Oh My God" type="application/atom+xml">
 </head>
 <body>
     <a id="cover"></a>
@@ -74,31 +76,21 @@
 <h1 id="分步讲解"><a href="#分步讲解" class="headerlink" title="分步讲解"></a>分步讲解</h1><h2 id="第一步-安装Node-js和Git"><a href="#第一步-安装Node-js和Git" class="headerlink" title="第一步:安装Node.js和Git"></a>第一步:安装Node.js和Git</h2><p>具体软件的安装要看你是什么系统,网上攻略挺多的,可以参考<a target="_blank" rel="noopener" href="https://www.runoob.com/nodejs/nodejs-install-setup.html">Node.js</a>和<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">Git</a>.之后我们只需要在命令行操作即可.</p>
 <h2 id="第二步-部署hexo"><a href="#第二步-部署hexo" class="headerlink" title="第二步:部署hexo"></a>第二步:部署hexo</h2><p>Hexo是一个轻量的静态博客框架,balabala,总之方便好用,现在已经比较成熟了(大概遇到的问题百度谷歌都有了,所以放心继续吧).简单来说就是我们利用它的框架,写markdown文件,再托管到GitHub Pages服务上,从具体使用来说就是你跑起来以后就是重复命令行和写markdown的事了(基本操作,进阶玩家可以研读一下代码然后在原始基础上完成自己独特的博客页面).</p>
 <p>关于Hexo可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">文档</a>,里面其实已经比较详细的介绍了如何使用hexo从安装到使用,以及每个部分的含义.从效率出发,我们拿出其中落到实处的操作贴一下.</p>
-<h3 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h3><p>在终端执行(任意目录):</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>如果出现command not found的问题,多半是Node.js安装有问题,目前安装Node.js顺带就会安装好了npm,可以用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p>命令查看一下.</p>
-<h3 id="Hexo的初始化"><a href="#Hexo的初始化" class="headerlink" title="Hexo的初始化"></a>Hexo的初始化</h3><p>在你想要的位置创建一个目录(这边目录为了省事用的是test,其实应该是你想要的github名字,所以要先去注册一个GitHub 帐号,看下面链接github部分第一个链接即可,然后命名这个文件夹为your_github_name.github.io),假设绝对路径为folder</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;folder&gt;</span><br><span class="line">hexo init  </span><br><span class="line">git init #建仓</span><br><span class="line">ls #查看目录文件</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/1.png" alt="description"><br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/2.png" alt="description"><br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/3.png" alt="description"></p>
+<h3 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h3><p>在终端执行(任意目录):<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><br>如果出现command not found的问题,多半是Node.js安装有问题,目前安装Node.js顺带就会安装好了npm,可以用<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><br>命令查看一下.</p>
+<h3 id="Hexo的初始化"><a href="#Hexo的初始化" class="headerlink" title="Hexo的初始化"></a>Hexo的初始化</h3><p>在你想要的位置创建一个目录(这边目录为了省事用的是test,其实应该是你想要的github名字,所以要先去注册一个GitHub 帐号,看下面链接github部分第一个链接即可,然后命名这个文件夹为your_github_name.github.io),假设绝对路径为folder<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;folder&gt;</span><br><span class="line">hexo init  </span><br><span class="line">git init #建仓</span><br><span class="line">ls #查看目录文件</span><br></pre></td></tr></table></figure><br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/1.png" alt="description"><br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/2.png" alt="description"><br><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/3.png" alt="description"></p>
 <p>目录结构大概是:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
-<p>简单了解一下hexo的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">指令</a>,我们用到的主要是以下:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt; #新建一个网站。如果没有设置 folder ，Hexo 默认在目前的文件夹建立网站。</span><br><span class="line">hexo new [layout] &lt;title&gt;#新建文章 </span><br><span class="line">hexo clean #清除缓存文件 (db.json) 和已生成的静态文件 (public)。</span><br><span class="line">hexo generate #生成静态文件,可以简写为hexo g</span><br><span class="line">hexo server #启动服务器。默认情况下，访问网址为： http://localhost:4000/,可以简写为hexo s</span><br><span class="line">hexo deploy #部署网站,可以简写为hexo d</span><br></pre></td></tr></table></figure>
-
-<p>此时你可以运行:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>在终端会看到:</p>
+<p>简单了解一下hexo的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands">指令</a>,我们用到的主要是以下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt; #新建一个网站。如果没有设置 folder ，Hexo 默认在目前的文件夹建立网站。</span><br><span class="line">hexo new [layout] &lt;title&gt;#新建文章 </span><br><span class="line">hexo clean #清除缓存文件 (db.json) 和已生成的静态文件 (public)。</span><br><span class="line">hexo generate #生成静态文件,可以简写为hexo g</span><br><span class="line">hexo server #启动服务器。默认情况下，访问网址为： http://localhost:4000/,可以简写为hexo s</span><br><span class="line">hexo deploy #部署网站,可以简写为hexo d</span><br></pre></td></tr></table></figure></p>
+<p>此时你可以运行:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure><br>在终端会看到:</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/4.png" alt="description"></p>
 <p>打开这个网址,看到的是</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/5.png" alt="description"></p>
 <p>就!对!啦!</p>
 <h2 id="第三步-链接github-这部分搬运自here"><a href="#第三步-链接github-这部分搬运自here" class="headerlink" title="第三步:链接github(这部分搬运自here)"></a>第三步:链接github(这部分搬运自<a target="_blank" rel="noopener" href="https://blog.aierui.com/a/16010316/">here</a>)</h2><h3 id="注册github"><a href="#注册github" class="headerlink" title="注册github"></a>注册github</h3><p>如果没有github账号的筒子们要访问<a target="_blank" rel="noopener" href="http://www.github.com/">官网</a>注册一下.</p>
-<h3 id="配置和使用github-详细点击"><a href="#配置和使用github-详细点击" class="headerlink" title="配置和使用github(详细点击)"></a>配置和使用github(详细<a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages">点击</a>)</h3><p><strong><em>配置 SSH keys</em></strong></p>
+<h3 id="配置和使用github-详细点击"><a href="#配置和使用github-详细点击" class="headerlink" title="配置和使用github(详细点击)"></a>配置和使用github(详细<a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages">点击</a>)</h3><p><strong>_配置 SSH keys_</strong></p>
 <p>我们如何让本地git项目与远程的github建立联系呢？用SSH keys。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh 检查本机的ssh密钥</span><br></pre></td></tr></table></figure>
-<p>如果提示：No such file or directory 说明你是第一次使用git。<br><strong><em>生成新的SSH Key：</em></strong></p>
+<p>如果提示：No such file or directory 说明你是第一次使用git。<br><strong>_生成新的SSH Key：_</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮件地址@youremail.com&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</span><br></pre></td></tr></table></figure>
 <p>注意1: 此处的邮箱地址，你可以输入自己的邮箱地址；注意2: 此处的「-C」的是大写的「C」</p>
 <p>然后系统会要你输入密码：</p>
@@ -107,34 +99,23 @@
 <p>注意：输入密码的时候没有*字样的，你直接输入就可以了。</p>
 <p>最后看到这样的界面，就成功设置ssh key了：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/6.png" alt="description"></p>
-<p><strong><em>添加 SSH Key 到 GitHub</em></strong></p>
+<p><strong>_添加 SSH Key 到 GitHub_</strong></p>
 <p>在本机设置SSH Key之后，需要添加到GitHub上，以完成SSH链接的设置。</p>
 <p>1、打开本地的id_rsa.pub文件(新生成的话在当时显示的文件夹/Users/your_user_directory/.ssh/id_rsa,因为我们是直接回车的,否则在~/.ssh/中)。此文件里面内容为刚才生成的密钥。如果看不到这个文件，你需要设置显示隐藏文件。准确的复制这个文件的内容，才能保证设置的成功。<br>2、登陆github系统。点击右上角的 Account Settings—&gt;SSH Public keys —&gt; add another public keys<br>3、把你本地生成的密钥复制到里面（key文本框中）， 点击 add key 就ok了</p>
-<p><strong><em>测试</em></strong></p>
-<p>可以输入下面的命令，看看设置是否成功，<a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;</a>的部分不要修改：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>如果是下面的反馈：</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)?</span><br></pre></td></tr></table></figure>
-<p>不要紧张，输入yes就好，然后会看到：</p>
+<p><strong>_测试_</strong></p>
+<p>可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><br>如果是下面的反馈：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host &#39;github.com (207.97.227.239)&#39; can&#39;t be established.RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)?</span><br></pre></td></tr></table></figure><br>不要紧张，输入yes就好，然后会看到：</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi aierui! You’ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>设置用户信息</em></strong></p>
+<p><strong>_设置用户信息_</strong></p>
 <p>现在你已经可以通过 SSH 链接到 GitHub 了，还有一些个人信息需要完善的。</p>
-<p>Git 会根据用户的名字和邮箱来记录提交。GitHub 也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;aierui&quot;//用户名</span><br><span class="line">git config --global user.email  &quot;imland@outlook.com&quot;//填写自己的邮箱    </span><br></pre></td></tr></table></figure>
-<p><strong><em>SSH Key 配置成功</em></strong></p>
+<p>Git 会根据用户的名字和邮箱来记录提交。GitHub 也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;aierui&quot;//用户名</span><br><span class="line">git config --global user.email  &quot;imland@outlook.com&quot;//填写自己的邮箱    </span><br></pre></td></tr></table></figure><br><strong>_SSH Key 配置成功_</strong></p>
 <p>本机已成功连接到 github。若有问题，请重新设置。常见错误请参考：<br><a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">GitHub Help - Generating SSH Keys</a>和  <a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/error-permission-denied-publickey">GitHub Help - Error Permission denied (publickey)</a>.</p>
-<h3 id="在线预览"><a href="#在线预览" class="headerlink" title="在线预览"></a>在线预览</h3><p>终于,结束了漫长的枯燥的配置,我们要继续无聊的机械工作了.<br><strong><em>创建仓库和本地远程到GitHub仓库</em></strong></p>
+<h3 id="在线预览"><a href="#在线预览" class="headerlink" title="在线预览"></a>在线预览</h3><p>终于,结束了漫长的枯燥的配置,我们要继续无聊的机械工作了.<br><strong>_创建仓库和本地远程到GitHub仓库_</strong></p>
 <p>首先在GitHub上创建一个仓库repository，注意仓库名称必须为你的github用户名.github.io</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/20201113/7.png" alt="description"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将当前的改动暂存在本地仓库</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将暂存的改动提交到本地仓库，并写入本次提交的注释是”first post“</span></span><br><span class="line">git commit -m &quot;first post&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将远程仓库在本地添加一个引用：origin</span></span><br><span class="line">git remote add origin https://github.com/username/projectName.git</span><br><span class="line"><span class="meta">#</span><span class="bash"> 向origin推送gh-pages分支，该命令将会将本地分支gh-pages推送到github的远程仓库，并在远程仓库创建一个同名的分支。该命令后会提示输入用户名和密码。</span></span><br><span class="line">git push origin gh-pages</span><br></pre></td></tr></table></figure>
 <p>在GitHub上将gh-pages merge 到msater上<br>这一步(黑色框)其实我没做,好像也没啥问题.</p>
-<p><strong><em>添加部署代码</em></strong></p>
-<p>在站点的_config.yml文件新增字段(分站点的_config.yml和主题的,站点的就在外层,主题的在themes/主题名字/里)<br>找到deploy站点部署,到github要配置这里, 非常重要</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   type: git 部署类型若有问题，其他类型自行google之</span><br><span class="line">   repository: https:&#x2F;&#x2F;github.com&#x2F;Aierui&#x2F;aierui.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line">   plugins: -hexo-generator-feed</span><br></pre></td></tr></table></figure>
-<p>merge后就可以部署上去了(所以你没做我也没做的那一步就不用管这个)，在Git命令黑窗口里输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g #生成静态网页</span><br><span class="line">hexo d #开始部署</span><br></pre></td></tr></table></figure>
-
+<p><strong>_添加部署代码_</strong></p>
+<p>在站点的_config.yml文件新增字段(分站点的_config.yml和主题的,站点的就在外层,主题的在themes/主题名字/里)<br>找到deploy站点部署,到github要配置这里, 非常重要<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   type: git 部署类型若有问题，其他类型自行google之</span><br><span class="line">   repository: https:&#x2F;&#x2F;github.com&#x2F;Aierui&#x2F;aierui.github.io.git</span><br><span class="line">   branch: master</span><br><span class="line">   plugins: -hexo-generator-feed</span><br></pre></td></tr></table></figure><br>merge后就可以部署上去了(所以你没做我也没做的那一步就不用管这个)，在Git命令黑窗口里输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g #生成静态网页</span><br><span class="line">hexo d #开始部署</span><br></pre></td></tr></table></figure></p>
 <p>然后在浏览器输入aierui.github.io（自己对应即可）,就可以看到和之前一样<br>(没改动就是本地搭建的原生hexo主页),至此基本功能就实现啦!</p>
 <h2 id="第四步-域名购买和解析"><a href="#第四步-域名购买和解析" class="headerlink" title="第四步:域名购买和解析"></a>第四步:域名购买和解析</h2><p><strong>域名购买</strong></p>
 <p>用github名来访问终究是太麻烦(不够cool!),所以有闲钱还推荐大家购买一下域名,解析一下就可以用你自己挑选的名字在互联网占有一址之地啦,学生党的话国内的阿里云和腾讯云似乎是有优惠的,可以去看看,.com的后缀名会贵点,.xyz这种就相对便宜了.<br>我用的是GODAddy,其他还有万网啊啥的,这个自选即可.以下购买部分教程来自<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20463581/answer/25478916">这里</a>.<br>现在 <a target="_blank" rel="noopener" href="https://sg.godaddy.com/zh">GoDaddy</a>已经有中文版了，虽然国家显示是新加坡，但不影响使用.</p>
@@ -193,8 +174,7 @@
 <li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018803949">Hexo+Next集成Algolia搜索</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.notes.worstone.cn/2020/08/01/Hexo%E4%B8%BB%E9%A2%98LiveForCode%E4%BB%8B%E7%BB%8D/">Hexo主题LiveForCode介绍</a></li>
 <li><a target="_blank" rel="noopener" href="https://ioliu.cn/2017/add-valine-comments-to-your-blog/">valine</a></li>
-<li><a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages">使用Github Pages建独立博客</a></li>
-<li><a target="_blank" rel="noopener" href="https://tzhou2018.github.io/2018/04/%E4%B8%BAGitHub-Pages%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%B9%B6%E6%B7%BB%E5%8A%A0SSL-%E5%BC%80%E5%90%AFHTTPS%E5%BC%BA%E5%88%B6/">为GitHub Pages自定义域名并添加SSL-开启https强制</a></li>
+<li><a target="_blank" rel="noopener" href="http://beiyuu.com/github-pages">使用Github Pages建独立博客</a><br>9.<a target="_blank" rel="noopener" href="https://tzhou2018.github.io/2018/04/%E4%B8%BAGitHub-Pages%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%B9%B6%E6%B7%BB%E5%8A%A0SSL-%E5%BC%80%E5%90%AFHTTPS%E5%BC%BA%E5%88%B6/">为GitHub Pages自定义域名并添加SSL-开启https强制</a></li>
 </ol>
 
         <p class="suffix-end">__END__</p>
