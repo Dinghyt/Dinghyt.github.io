@@ -466,12 +466,12 @@ y_c/w_c\\
 z_c/w_c
 \end{bmatrix}</script><p>上面的除以$w_clip$过程被称为透视除法，要找到我们需要的矩阵P，我们需要利用两个关系:</p>
 <ul>
-<li>投影位置$x_p$,$y_p$和相机坐标系中点$x_e$,$y_e$之间关系。投影后对于z分量都是$z_{p}=-nearVal$。</li>
-<li>利用$x_p$，$y_p$和 $x_{ndc}$，$y_{ndc}$ 关系求出$x_{clip}$,$y_{clip}$。</li>
-<li>利用$z_n$与$z_e$关系得出$z_{clip}$</li>
+<li>投影位置$x<em>p$,$y_p$和相机坐标系中点$x_e$,$y_e$之间关系。投影后对于z分量都是$z</em>{p}=-nearVal$。</li>
+<li>利用$x<em>p$，$y_p$和 $x</em>{ndc}$，$y<em>{ndc}$ 关系求出$x</em>{clip}$,$y_{clip}$。</li>
+<li>利用$z<em>n$与$z_e$关系得出$z</em>{clip}$</li>
 </ul>
 <blockquote>
-<p>以上用到了几个注脚，其中e指代eye(观察坐标)，c指代clip(裁剪坐标)。p指代projection(投影坐标)，ndc指代标准设备坐标系。我们的目标就是将相机坐标系中点$(x_e,y_e,z_e)$映射到一个标准立方体$(x_{ndc},y_{ndc},z_{ndc})$中。</p>
+<p>以上用到了几个注脚，其中e指代eye(观察坐标)，c指代clip(裁剪坐标)。p指代projection(投影坐标)，ndc指代标准设备坐标系。我们的目标就是将相机坐标系中点$(x<em>e,y_e,z_e)$映射到一个标准立方体$(x</em>{ndc},y<em>{ndc},z</em>{ndc})$中。</p>
 </blockquote>
 <h3 id="计算投影平面上的位置"><a href="#计算投影平面上的位置" class="headerlink" title="计算投影平面上的位置"></a>计算投影平面上的位置</h3><p>投影时原先位于相机坐标系中的点$p=(x_e,y_e,z_e)$投影到投影平面后，得到点$p′=(x_p,y_p,−nearVal)$。具体过程如下图所示:</p>
 <center>
