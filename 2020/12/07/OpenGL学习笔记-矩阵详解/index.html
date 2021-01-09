@@ -102,12 +102,7 @@
 <li>songho<a target="_blank" rel="noopener" href="http://www.songho.ca/opengl/gl_projectionmatrix.html"> OpenGL Projection Matrix</a></li>
 </ul>
 <h1 id="start"><a href="#start" class="headerlink" title="start"></a>start</h1><p>OpenGL最终的渲染设备是2D的，我们需要将3D表示的场景转换为最终的2D形式，前面使用模型变换和视变换将物体坐标转换到照相机坐标系后，需要进行投影变换，将坐标从相机—&gt;裁剪坐标系，经过透视除法后，变换到规范化设备坐标系(NDC)，最后进行视口变换后，3D坐标才变换到屏幕上的2D坐标，这个过程如下图所示：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/1.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/1.png" alt="avatar"></p>
 <p>其中比较关键的就是以下，</p>
 <ul>
 <li>模型矩阵：将物体从局部坐标变换到世界空间坐标</li>
@@ -121,13 +116,7 @@ V_{screen2D} = M_{viewPort} \cdot M_{projection} \cdot M_{view} \cdot M_{model} 
 <h1 id="模型矩阵"><a href="#模型矩阵" class="headerlink" title="模型矩阵"></a>模型矩阵</h1><p>我们在OpenGL中通过定义一组顶点来定义一个模型，或者通过其他3D建模软件事先建好模型然后导入到OpenGL中。顶点属性定义了模型。如果我们要在一个场景中不同位置显示同一个模型怎么办？ 如果我们要以不同的比例、不同角度显示同一个模型又怎么办 ？</p>
 <p>如果继续以类似的顶点属性数据定义同一个模型，调整它满足上述需求的话，不仅浪费显卡内存，而且这个调整的工作量也很大，因此效率很低。更好地解决方法是，我们定义的模型根据需要可以执行放大、缩小等操作来不同比例显示，可以通过平移来放在不同位置，可以通过旋转来按不同角度显示。这种方式就是执行模型变换。</p>
 <p>模型变换通过对模型执行平移(translation)、缩放(scale)、旋转(rotation)、镜像(reflection)、错切(shear)等操作，来调整模型的过程。通过模型变换，我们可以按照合理方式指定场景中物体的位置等信息。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/2.png)
-
-</center>
-
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/2.png" alt="avatar"></p>
 <p>这部分不是很困难，相关的矩阵如下：</p>
 <h2 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h2><p>假设缩放向量表示为$\left ( S_1, S_2,S_3 \right )$:</p>
 <script type="math/tex; mode=display">
@@ -237,31 +226,18 @@ R_zR_x(1-cos\theta)-R_ysin\theta &  R_zR_y(1-cos\theta)+R_xsin\theta& cos\theta 
 <li>相机不动，让立方体绕着+y轴，旋转-90度，此时也能实现同样的目的。注意这时相机没有转动。</li>
 </ul>
 <p>在OpenGL中，采用方式2来完成物体成像的调整。例如下面的图表示了假想的相机</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/3.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/3.png" alt="avatar"></p>
 <p>接下来我们详细看一下视变换矩阵数学上的推导。</p>
 <h2 id="视变换矩阵的推导"><a href="#视变换矩阵的推导" class="headerlink" title="视变换矩阵的推导"></a>视变换矩阵的推导</h2><h3 id="坐标系生成"><a href="#坐标系生成" class="headerlink" title="坐标系生成"></a>坐标系生成</h3><p>相机坐标系由相机位置eye和UVN基向量(或者说由forward, side ,up）构成，如下图所示：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/4.png)
-
-</center>
-各个参数的含义如下：
-- 相机位置 也称为观察参考点 (View Reference Point) 在**世界坐标系**下指定相机的位置eye。
-- 相机镜头方向，由相机位置和相机指向的目标(target)位置计算出，forwrad=(target−eye)。
-- 相机顶部正朝向: View Up Vector 确定在相机哪个方向是向上的，一般取(0, 1, 0)。这个参数稍后详细解释。
-
-上面的图简化为：
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/5.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/4.png" alt="avatar"></p>
+<p>各个参数的含义如下：</p>
+<ul>
+<li>相机位置 也称为观察参考点 (View Reference Point) 在<strong>世界坐标系</strong>下指定相机的位置eye。</li>
+<li>相机镜头方向，由相机位置和相机指向的目标(target)位置计算出，forwrad=(target−eye)。</li>
+<li>相机顶部正朝向: View Up Vector 确定在相机哪个方向是向上的，一般取(0, 1, 0)。这个参数稍后详细解释。</li>
+</ul>
+<p>上面的图简化为：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/5.png" alt="avatar"></p>
 <p>在使用过程中，我们是要指定的参数即为相机位置(观察参考点 (View Reference Point) 在世界坐标系下指定相机的位置$eye$)，相机指向的目标位置($target$，同世界坐标下)和$viewUp vector$<strong>三个参数</strong>。</p>
 <ol>
 <li>首先计算相机镜头方向$forward = target - eye$，并进行标准化：<script type="math/tex; mode=display">
@@ -355,51 +331,25 @@ u[0] &u[1] &u[2] &-dot(u,eye) \\
 <p>这个定理告诉我们: 只要知道了线性空间$U$的给定基$u_1,u_2,⋯,u_n$在线性变换$T$下对应的值$T(u_1),T(u_2),⋯,T(u_n)$，线性变换$T$也就由$u_i$及$T(u_i)$的对应关系确定了。<br>这个定理的作用就好比，两点确定一条直线。因此我们可以通过计算:<br>$A=(T(u_1),T(u_2),⋯,T(u_n))$来获取线性变换$T$对应的矩阵$A$。</p>
 <p>也就是说，矩阵$A$的列向量，由$T(u_i)$在基$u_1,u_2,⋯,u_n$下的坐标唯一确定。同时给出一个矩阵$A$作为线性变换$T$在基$u_1,u_2,⋯,u_n$下的矩阵，也就给出了该基在线性变换T下对应的值$T(u_1),T(u_2),⋯,T(u_n)$，从而确定了线性变换$T$。这表明线性变换$T$与矩阵之间存在一一对应关系，上面已经证明了这个结论。</p>
 <p>例如对于绕z轴旋转矩阵，从基和转换后基的角度，也就是从$x,y$轴来看，$x$转换后为$x′$，$y$转换后为$y′$，如下图所示:</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/6.png)
-
-</center>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/7.png)
-
-</center>
-因此可以顺利的写出旋转矩阵为:
-$$
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/6.png" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/7.png" alt="avatar"></p>
+<p>因此可以顺利的写出旋转矩阵为:</p>
+<script type="math/tex; mode=display">
 R(\theta) = \begin{bmatrix}
 cos\theta & -sin\theta\\ 
 sin\theta & cos\theta
-\end{bmatrix}
-$$
-矩阵第一列即为$x$转换后的$x′$轴的对应的坐标，第二列即为$y$转换后的$y′$轴对应的坐标。显然这个计算方法，比利用极坐标公式来得快。
-
-在后面使用OpenGL模型变换矩阵时，经常要使用到这个方法，理解了这一点后面理解模型变换矩阵就会变得简单。
-
-## OpenGL中视变换的实现
-在OpenGL中，我们可以通过函数glm::lookAt来实现相机指定，这个函数计算的就是上面求出的视变换矩阵。以前glu版本实现为gluLookAt，这两个函数完成的功能是一样的，参数定义如下：
-API lookAt ( GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ, GLdouble centerX, GLdouble centerY, GLdouble centerZ, GLdouble upX, GLdouble upY, GLdouble upZ)
-其中$eye$指定相机位置，$center$指定相机指向目标位置$target$，$up$指定$viewUp$向量。
-
-还记得之前的那个问题吗，初始时，相机镜头指向-z轴，要观察-z轴上的一个立方体的右侧面，我们可以怎么设置我们的lookat矩阵呢?
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/8.png)
-
-</center>
-
+\end{bmatrix}</script><p>矩阵第一列即为$x$转换后的$x′$轴的对应的坐标，第二列即为$y$转换后的$y′$轴对应的坐标。显然这个计算方法，比利用极坐标公式来得快。</p>
+<p>在后面使用OpenGL模型变换矩阵时，经常要使用到这个方法，理解了这一点后面理解模型变换矩阵就会变得简单。</p>
+<h2 id="OpenGL中视变换的实现"><a href="#OpenGL中视变换的实现" class="headerlink" title="OpenGL中视变换的实现"></a>OpenGL中视变换的实现</h2><p>在OpenGL中，我们可以通过函数glm::lookAt来实现相机指定，这个函数计算的就是上面求出的视变换矩阵。以前glu版本实现为gluLookAt，这两个函数完成的功能是一样的，参数定义如下：<br>API lookAt ( GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ, GLdouble centerX, GLdouble centerY, GLdouble centerZ, GLdouble upX, GLdouble upY, GLdouble upZ)<br>其中$eye$指定相机位置，$center$指定相机指向目标位置$target$，$up$指定$viewUp$向量。</p>
+<p>还记得之前的那个问题吗，初始时，相机镜头指向-z轴，要观察-z轴上的一个立方体的右侧面，我们可以怎么设置我们的lookat矩阵呢?</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/8.png" alt="avatar"></p>
 <p>默认情况下相机位于$(0,0,0)$，指向$-z$轴，对应$eye = (0,0,0), center = (0,0,-1), up = (0,1,0)$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">glm::lookAt(glm::vec(<span class="number">0.0f</span>,<span class="number">0.0f</span>,<span class="number">0.0f</span>),</span><br><span class="line">            glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>),</span><br><span class="line">            glm::vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>));</span><br></pre></td></tr></table></figure><br>第一种方式，相机绕着+y轴旋转90度，相机指向-x轴，则等价于$eye = (0,0,0), center = (-1,0,0), up = (0,1,0)$<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">glm::mat4 view &#x3D;glm::lookAt(glm::vec(0.0f,0.0f,0.0f),</span><br><span class="line">                            glm::vec3(-1.0f, 0.0f, 0.0f),</span><br><span class="line">                            glm::vec3(0.0f, 1.0f, 0.0f));</span><br></pre></td></tr></table></figure><br>上述第二种方式，通过立方体绕着+y轴旋转-90度，则得到的矩阵M,相当于:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glm::mat4 model = glm::rotate(glm::mat4(<span class="number">1.0</span>), glm::radians(<span class="number">-90.0f</span>), glm::vec3(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>));</span><br></pre></td></tr></table></figure></p>
 <p>这里得到的矩阵M和上面的矩阵view是相同的，可以自行验证下。也就是说，通过旋转相机+y轴90度，和旋转立方体+y轴-90度，最终计算得到的矩阵相同。调整相机来得到观察效果，可以通过相应的方式来调整物体达到相同的效果。在OpenGL中并不存在真正的相机，这只是一个虚构的概念。</p>
 <h2 id="视角"><a href="#视角" class="headerlink" title="视角"></a>视角</h2><p><code>glm::LookAt</code>函数需要一个<code>位置</code>、<code>目标</code>和<code>上向量</code>。它会创建一个和在上一节使用的一样的观察矩阵。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glm::mat4 view;</span><br><span class="line">view = glm::lookAt(glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">3.0f</span>), </span><br><span class="line">                   glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>), </span><br><span class="line">                   glm::vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>));</span><br></pre></td></tr></table></figure><br>一般我们不改动上向量（其实不是真正最后观察坐标中的上向量，我们计算右向量使用的那个上向量）。我们可以改动位置和目标，改动位置得到的是从不同位置看向目标时看到的结果（一般我们是走进走远或者左右走动，也对应着z轴和x轴，不怎么会用到y轴）。而改动目标则可以模拟在同一个位置看向不同方向得到的结果。打个比方，好比有个房子在原地，修改位置是你在不同的位置看同一点，修改目标是你站在那里扫视它（一般我们就是左右看（绕y轴），上下看（绕x轴），也就是偏航角和俯仰角）。</p>
 <p>这里我们再详细讨论一下如何修改lookat矩阵达到自由转换视角。具体实现可以参考教程1.7。</p>
 <p>截至目前我们使用的都是欧拉角，其实对于理论逻辑/底层计算来讲，都应该使用四元数而并非欧拉角，因为欧拉角会出现<code>万向节死锁</code>。<a target="_blank" rel="noopener" href="https://blog.csdn.net/Jaihk662/article/details/106519595">这里</a>有个详细的例子。</p>
 <p>不过以下还是基于欧拉角进行讨论。我们已经知道了三种欧拉角。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/9.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/9.png" alt="avatar"></p>
 <ul>
 <li><strong>俯仰角(Pitch)</strong>：沿x轴旋转的角，从上往下看的角</li>
 <li><strong>偏航角(Yaw)</strong>：沿y轴旋转的角，从左往右看的角</li>
@@ -423,21 +373,11 @@ API lookAt ( GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ, GLdouble centerX, GLdo
 <p>LookAt里面有3个属性，摄像机位置，目标位置和世界上向量，改变摄像机视角的方法正是改变这个目标位置。换句话说，我们其实在确定摄像机坐标系中的z轴。我们在世界坐标系中定义它。那么这个目标位置我们又怎么和欧拉角联系到一起呢。</p>
 <p>这部分我目前还不是很清楚，等后续再来补充。目前的理解是通过定义:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glm::vec3 cameraPos   = glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>,  <span class="number">3.0f</span>);</span><br><span class="line">glm::vec3 cameraFront = glm::vec3(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">-1.0f</span>);</span><br><span class="line">glm::vec3 cameraUp    = glm::vec3(<span class="number">0.0f</span>, <span class="number">1.0f</span>,  <span class="number">0.0f</span>);</span><br><span class="line">view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);</span><br></pre></td></tr></table></figure><br>令鼠标左右上下代表着偏转角和俯仰角，相当于是在利用两个欧拉角定义世界坐标系（也能认为是惯性坐标系下）得到的方向向量。</p>
 <h1 id="投影矩阵"><a href="#投影矩阵" class="headerlink" title="投影矩阵"></a>投影矩阵</h1><p>投影变换通过指定视见体(viewing frustum)来决定场景中哪些物体将可能会呈现在屏幕上。在视见体中的物体会出现在投影平面上，而在视见体之外的物体不会出现在投影平面上。投影包括很多类型，OpenGL中主要考虑透视投影(perspective projection)和正交投影( orthographic projection)。两者之间存在很大的区别，如下图所示(图片来自Modern OpenGL)：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/10.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/10.png" alt="avatar"></p>
 <p>上面的图中，红色和黄色球在视见体内，因而呈现在投影平面上，而绿色球在视见体外，没有在投影平面上成像。</p>
 <p>指定视见体通过$(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble nearVal, GLdouble farVal)$6个参数来指定。注意在相机坐标系下，相机指向-z轴，nearVal和farVal表示的剪裁平面分别为:近裁剪平面$z=−nearVal$，以及远裁剪平面$z=−farVal$。推导投影矩阵，就要利用这6个参数。<strong>在OpenGL中成像是在近裁剪平面上完成。</strong></p>
 <h2 id="透视投影矩阵的推导"><a href="#透视投影矩阵的推导" class="headerlink" title="透视投影矩阵的推导:"></a>透视投影矩阵的推导:</h2><p>透视投影中，相机坐标系中点被映射到一个标准立方体中，即规范化设备坐标系中，其中$[l,r]$映射到$[−1,1]$，$[b,t]$映射到$[-1,1]$中，以及$[n,f]$被映射到$[−1,1]$，如下图所示：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/11.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/11.png" alt="avatar"></p>
 <blockquote>
 <p>注意到上面的相机坐标系为右手系，而NDC中+z轴向内，为左手系。</p>
 </blockquote>
@@ -474,17 +414,8 @@ z_c/w_c
 <p>以上用到了几个注脚，其中e指代eye(观察坐标)，c指代clip(裁剪坐标)。p指代projection(投影坐标)，ndc指代标准设备坐标系。我们的目标就是将相机坐标系中点$(x<em>e,y_e,z_e)$映射到一个标准立方体$(x</em>{ndc},y<em>{ndc},z</em>{ndc})$中。</p>
 </blockquote>
 <h3 id="计算投影平面上的位置"><a href="#计算投影平面上的位置" class="headerlink" title="计算投影平面上的位置"></a>计算投影平面上的位置</h3><p>投影时原先位于相机坐标系中的点$p=(x_e,y_e,z_e)$投影到投影平面后，得到点$p′=(x_p,y_p,−nearVal)$。具体过程如下图所示:</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/12.png)
-
-</center>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/13.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/12.png" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/13.png" alt="avatar"></p>
 <p>需要空间想象一下，可以得出左边的图是俯视图，右边是侧视图。利用三角形的相似性，通过俯视图可以得到$\frac{x_p}{x_e} = \frac{-n}{z_e}$，即：</p>
 <script type="math/tex; mode=display">
 x_p = -\frac{nx_e}{z_e}</script><p>同理通过侧视图可以得到：</p>
@@ -510,12 +441,7 @@ z_e\\
 w_e
 \end{bmatrix}</script><p>下面利用投影点和规范化设备坐标的关系计算出矩阵P的前面两行。</p>
 <p>对于投影平面上$ x_p$满足 $[l,r]$线性映射到$ [−1,1]$对于 $y_p$满足 $[b,t]$线性映射到 $[−1,1]$。根据图可以得到线性关系。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/14.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/14.png" alt="avatar"></p>
 <p>再结合上面算出的$x_p = -\frac{nx_e}{z_e}$和$y_p =- \frac{ny_e}{z_e}$，代入提取可以得到：</p>
 <script type="math/tex; mode=display">
 x_n = \frac{(\frac{2x_en}{r-l}+\frac{r+l}{r-l} \ast z_e)}{-z_e}</script><script type="math/tex; mode=display">
@@ -562,31 +488,12 @@ P = \begin{bmatrix}
 \end{bmatrix}</script><h3 id="Zfighting问题"><a href="#Zfighting问题" class="headerlink" title="Zfighting问题"></a>Zfighting问题</h3><p>根据上面</p>
 <script type="math/tex; mode=display">
 z_n = \frac{-\frac{f+n}{f-n}z_e-\frac{2fn}{f-n}}{-z_e}</script><p>这是一个非线性关系函数，作图如下：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/15.png)
-
-</center>
-从左边图我们可以看到，在近裁剪平面附近$z_n$值变化比较大，精确度较好；而在远裁剪平面附近，有一段距离内，$z_n$近乎持平，精确度不好。当增大远近裁剪平面的范围$[−n,−f]$后，如右边图所示，我们看到在远裁剪平面附近，不同相机坐标$z_e$对应的$z_n$相同，精确度低的现象更为明显，这种深度的精确度引起的问题称之为zFighting。要尽量减小$[-n,-f]$的范围，以减轻zFighting问题。
-
-
-### gluPerspective
-以上指定视见体通过$(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble nearVal, GLdouble farVal)$6个参数来指定，另外一种经常使用的方式是通过 **视角(Fov)，宽高比(Aspect)**来指定透视投影，例如旧版中函数`gluPerspective`,也是我们用到的教程中的：
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//API void gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);</span></span><br><span class="line">projection = glm::perspective(glm::radians(<span class="number">45.0f</span>), (<span class="keyword">float</span>)screenWidth/(<span class="keyword">float</span>)screenHeight, <span class="number">0.1f</span>, <span class="number">100.0f</span>);</span><br></pre></td></tr></table></figure>
-其中指定fovy指定视角，aspect指定宽高比，zNear和zFar指定剪裁平面。fovy的理解如下图所示([来自opengl 投影](http://www.gimoo.net/t/1507/55a62113251f2.html))：
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/16.png)
-
-</center>
-这些参数指定的是一个对称的视见体，如下图所示：
-
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/17.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/15.png" alt="avatar"></p>
+<p>从左边图我们可以看到，在近裁剪平面附近$z_n$值变化比较大，精确度较好；而在远裁剪平面附近，有一段距离内，$z_n$近乎持平，精确度不好。当增大远近裁剪平面的范围$[−n,−f]$后，如右边图所示，我们看到在远裁剪平面附近，不同相机坐标$z_e$对应的$z_n$相同，精确度低的现象更为明显，这种深度的精确度引起的问题称之为zFighting。要尽量减小$[-n,-f]$的范围，以减轻zFighting问题。</p>
+<h3 id="gluPerspective"><a href="#gluPerspective" class="headerlink" title="gluPerspective"></a>gluPerspective</h3><p>以上指定视见体通过$(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble nearVal, GLdouble farVal)$6个参数来指定，另外一种经常使用的方式是通过 <strong>视角(Fov)，宽高比(Aspect)</strong>来指定透视投影，例如旧版中函数<code>gluPerspective</code>,也是我们用到的教程中的：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//API void gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);</span></span><br><span class="line">projection = glm::perspective(glm::radians(<span class="number">45.0f</span>), (<span class="keyword">float</span>)screenWidth/(<span class="keyword">float</span>)screenHeight, <span class="number">0.1f</span>, <span class="number">100.0f</span>);</span><br></pre></td></tr></table></figure><br>其中指定fovy指定视角，aspect指定宽高比，zNear和zFar指定剪裁平面。fovy的理解如下图所示(<a target="_blank" rel="noopener" href="http://www.gimoo.net/t/1507/55a62113251f2.html">来自opengl 投影</a>)：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/16.png" alt="avatar"></p>
+<p>这些参数指定的是一个对称的视见体，如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/17.png" alt="avatar"></p>
 <p>由这些参数，可以得到：</p>
 <script type="math/tex; mode=display">h = near \ast tan(\frac{\theta}{2})</script><script type="math/tex; mode=display">w = h \ast aspect</script><p>再对应到上面公式里需要的6个参数，后两个不变，前四个对应为：</p>
 <script type="math/tex; mode=display">r = w, l = -r</script><script type="math/tex; mode=display">t = h, b=-t</script><p>则得到<code>Fov透视投影矩阵</code>为：</p>
@@ -597,12 +504,7 @@ P = \begin{bmatrix}
  0& 0 & -\frac{f+n}{f-n} &-\frac{2fn}{f-n}\\ 
 0 & 0 & -1 & 0
 \end{bmatrix}</script><h2 id="正交投影矩阵的推导"><a href="#正交投影矩阵的推导" class="headerlink" title="正交投影矩阵的推导"></a>正交投影矩阵的推导</h2><p>相比于透视投影，正交投影矩阵的推导要简单些，如下图所示：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/18.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/18.png" alt="avatar"></p>
 <p>对于正交投影，有$x_p=x_e,y_p=y_e$，因而可以直接利用$x_e$与$x_n$的映射关系：$[l,−1],[r,1]$，利用$y_e$和$y_n$的映射关系：$[b,−1],[t,1]$，以及$z_e$和$z_n$的映射关系：$[−n,−1],[−f,1]$。得到：</p>
 <script type="math/tex; mode=display">
 x_n = \frac{2}{r-l}x_e-\frac{r+l}{r-l}</script><script type="math/tex; mode=display">
@@ -635,12 +537,7 @@ O = \begin{bmatrix}
  0& 0 & -\frac{2}{f-n} &-\frac{f+n}{f-n}\\ 
 0 & 0 &0 & 1
 \end{bmatrix}</script><h1 id="视口变换矩阵"><a href="#视口变换矩阵" class="headerlink" title="视口变换矩阵"></a>视口变换矩阵</h1><p>经过上述的投影变换，我们已经将观察坐标$(x_e,y_e,z_e)$变换成了NDC坐标$(x_n,y_n,z_n)$，视变换是将NDC坐标转换为显示屏幕坐标的过程，如下图所示：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/19.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.6.2/19.png" alt="avatar"></p>
 <p>视口变化通过函数:<br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glViewport.xhtmlhttps://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glViewport.xhtml">glViewport(GLint , GLint , GLsizei , GLsizei );</a><br><a target="_blank" rel="noopener" href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glViewport.xhtml">glDepthRangef(GLclampf , GLclampf );</a></p>
 <p>两个函数来指定。其中$(s_x,s_y)$表示窗口的左下角，$n_s$和$f_s$指定远近剪裁平面到屏幕坐标的映射关系。<br>使用线性映射关系如下：</p>
 <script type="math/tex; mode=display">
