@@ -77,12 +77,7 @@
 <p>图形渲染管线接受一组<strong>3D坐标</strong>，然后把它们转变为你屏幕上的<strong>有色2D像素</strong>输出。图形渲染管线可以被划分为几个阶段，每个阶段将会把前一个阶段的输出作为输入。所有这些阶段都是高度专门化的（它们都有一个特定的函数），并且很容易并行执行。正是由于它们具有并行执行的特性，当今大多数显卡都有成千上万的小处理核心，它们在GPU上为每一个（渲染管线）阶段运行各自的小程序，从而在图形渲染管线中快速处理你的数据。这些小程序叫做<code>着色器(Shader)</code>。</p>
 <p>有些着色器允许开发者自己配置，这就允许我们用自己写的着色器来替换默认的。这样我们就可以更细致地控制图形渲染管线中的特定部分了，而且因为它们运行在GPU上，所以它们可以给我们节约宝贵的CPU时间。OpenGL着色器是用OpenGL着色器语言(OpenGL Shading Language, <code>GLSL</code>)写成的，在下一节中我们再花更多时间研究它。</p>
 <p>下面，你会看到一个图形渲染管线的每个阶段的抽象展示。要注意蓝色部分代表的是我们可以注入自定义的着色器的部分。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/1.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/1.png" alt="description"></p>
 <ul>
 <li><p>首先，我们以数组的形式传递3个3D坐标作为图形渲染管线的输入，用来表示一个三角形，这个数组叫做<code>顶点数据(Vertex Data)</code>；顶点数据是一系列顶点的集合。一个顶点(Vertex)是一个3D坐标的数据的集合。而顶点数据是用<strong>顶点属性(Vertex Attribute)</strong>表示的，它可以包含任何我们想用的数据，但是简单起见，我们还是假定每个顶点只由一个3D位置(译注1)和一些颜色值组成的吧。</p>
 </li>
@@ -120,12 +115,7 @@
 <p>这样我们就可以得到一个程序对象<em>shaderProgram</em>，你可以重复以上的步骤定义多个程序对象，然后在渲染循环中用<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glUseProgram(shaderProgram);</span><br></pre></td></tr></table></figure><br>调用不同对象，之后每个着色器调用和渲染调用都会使用这个程序对象（也就是之前写的着色器)了。</p>
 <p>搞定着色器之后，我们还需要搞定输入顶点数据如何输入内存和解释，如何对接我们的着色器程序。</p>
 <h2 id="顶点输入"><a href="#顶点输入" class="headerlink" title="顶点输入"></a>顶点输入</h2><p>为了简单，我们令这一节绘制的节点的z为0，看平面效果。首先要理解一下这张图。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/2.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/2.png" alt="description"></p>
 <p>其中缩写代表的意思分别是：</p>
 <ul>
 <li>顶点数组对象：Vertex Array Object，<strong>VAO</strong></li>
@@ -174,12 +164,7 @@
 <li>glEnableVertexAttribArray(0);// 以顶点属性位置值作为参数，启用顶点属性</li>
 </ul>
 <p>我们的顶点缓冲数据会被解析为下面这样子（glVertexAttribPointer函数）：</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/3.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/3.png" alt="description"></p>
 <ul>
 <li>位置数据被储存为32位（4字节）浮点值。</li>
 <li>每个位置包含3个这样的值。</li>
@@ -206,12 +191,7 @@
 <h4 id="glDrawElements-GL-TRIANGLES-6-GL-UNSIGNED-INT-0"><a href="#glDrawElements-GL-TRIANGLES-6-GL-UNSIGNED-INT-0" class="headerlink" title="glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);"></a>glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);</h4><p>用<code>glDrawElements</code>来替换glDrawArrays函数，来指明我们从索引缓冲渲染。使用glDrawElements时，我们会使用当前绑定的索引缓冲对象中的索引进行绘制。</p>
 <p>第一个参数指定了我们绘制的模式，这个和glDrawArrays的一样。第二个参数是我们打算绘制顶点的个数，这里填6，也就是说我们一共需要绘制6个顶点。第三个参数是索引的类型，这里是GL_UNSIGNED_INT。最后一个参数里我们可以指定EBO中的偏移量（或者传递一个索引数组，但是这是当你不在使用索引缓冲对象的时候），但是我们会在这里填写0。</p>
 <p>glDrawElements函数从当前绑定到GL_ELEMENT_ARRAY_BUFFER目标的EBO中获取索引。这意味着我们必须在每次要用索引渲染一个物体时绑定相应的EBO，这还是有点麻烦。不过顶点数组对象同样可以保存索引缓冲对象的绑定状态。VAO绑定时正在绑定的索引缓冲对象会被保存为VAO的元素缓冲对象。绑定VAO的同时也会自动绑定EBO。这也是为什么我们之前的代码在绘制时候是绑定的VAO。</p>
-<center>
-
-![description](https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/4.png)
-
-</center>
-
+<p><img src="https://cdn.jsdelivr.net/gh/Dinghyt/dlog@1.0/static/image/1.2/4.png" alt="description"></p>
 <p> 两个三角形如左。要想用线框模式绘制你的三角形，你可以（在渲染循环）通过glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)函数配置OpenGL如何绘制图元。第一个参数表示我们打算将其应用到所有的三角形的正面和背面，第二个参数告诉我们用线来绘制。之后的绘制调用会一直以线框模式绘制三角形，直到我们用glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)将其设置回默认模式。</p>
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 出渲染循环后</span></span><br><span class="line"><span class="comment">// optional: de-allocate all resources once they&#x27;ve outlived their purpose:</span></span><br><span class="line"><span class="comment">// ------------------------------------------------------------------------</span></span><br><span class="line">glDeleteVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">glDeleteBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">glDeleteBuffers(<span class="number">1</span>, &amp;EBO);</span><br><span class="line">glDeleteProgram(shaderProgram);</span><br></pre></td></tr></table></figure>
 
